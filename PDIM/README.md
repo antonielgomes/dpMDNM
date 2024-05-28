@@ -1,6 +1,10 @@
 # PDIM
 
-PDIM (**P**oints in N **DIM**ensions) minimizes P points in N dimensions.
+**PDIM** (**P**oints in N **DIM**ensions) is a minimization script that distibutes P points in the surface of an N-sphere.
+
+### Code availability
+**PDIM** is written in `Python` and uses libraries, such as `numpy` and `scipy` for calculations. However **PDIM** is also available in a compiled version for [Linux](https://google.com) and [Windows](https://google.com).
+
 
 ### Reference
 If you use PDIM or dpMD, please refer to the following publication:
@@ -15,8 +19,6 @@ calculate `normal modes`
 ```
 charmm -i scripts/normal-modes.inp
 ```
-
-**PDIM** is also available in a compiled version for [Linux](https://github.com/soedinglab/MMseqs2/archive/71dd32ec43e3ac4dabf111bbc4b124f1c66a85f1.zip) and Windows.
 
 
 generate crd and dcd of modes:
