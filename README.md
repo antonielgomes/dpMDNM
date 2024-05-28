@@ -3,8 +3,10 @@
 calculate normal modes
 charmm -i scripts/normal-modes.inp
 
+
 generate crd and dcd of modes:
 charmm -i scripts/normal-modes-dcd-crd.inp nmodes=20
+
 
 generating normal mode combination
 bash scripts/mdenm-modes-combination.sh
