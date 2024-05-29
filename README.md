@@ -1,6 +1,6 @@
-# dpMD
+# distributed-points Molecular Dynamics
 
-This repository contains all files necessary to perform `distributed-points Molecular Dynamics` (dpMD), an enhanced-sampling approach that allows a large protein conformational sampling based on `normal mode` (NM) vectors. dpMD generates harmonically restrained structures along NM vectors that are further relaxed with standard MD simulations to fill the conformational space efficiently.
+`distributed-points Molecular Dynamics` (dpMD) is an enhanced-sampling approach that allows a large protein conformational sampling based on `normal mode` (NM) vectors. dpMD generates harmonically restrained structures along NM vectors that are further relaxed with standard MD simulations to fill the conformational space efficiently.
 
 The main novelty of dpMD is uniformly distributed vectors
 induces a given protein to explore conformation along normal mode vectors
