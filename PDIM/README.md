@@ -33,7 +33,7 @@ During minimization, the following variables are printed in every step:
 They are meaningful for monitoring the quality and `convergence` of data.
 
 ### Tips
-- Performance is highly affected as higher dimensions are considered. Consider using the `mirrored` algorithm. In this case, a `even number` of vectors is mandatory.
+- Performance is highly affected as higher dimensions are considered. Consider using the `mirrored` algorithm. In this case, an `even number` of vectors is mandatory.
 - Sometimes convergence is achieved with a smooth minimization progress. In such cases, consider using the `-s sum` flag and a higher number of cycles (-c).
 - Although a rigorous convergence tolerance (-t) slows down the minimization progress, it is likely to obtain a better final set of points. Consider using `lower values`, such as 0.00001. 
 - The initial set of points is completely random, thus distinct final set of points is expected. It is reasonable to consider performing several runs and select the one with `higher` Mdist or Mangle.
