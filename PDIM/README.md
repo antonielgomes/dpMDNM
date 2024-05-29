@@ -10,11 +10,11 @@ Examples of the minimization progress can be observed in [two](https://youtu.be/
 
 This script was devised to boost `protein conformational changes` using normal modes. We mapped the `normal mode space` into an `Euclidean space` for a **rational** normal mode combination and protein conformational exploration.
 
-Normal mode combined vectors separated by 1 Å from 2 to 8 dimensions (1.05 Å in 3 dimensions) can be accessed in the [points](https://github.com/antonielgomes/dpMD/tree/main/PDIM/points) directory.
-These values can be used as weights for combining vectors in `orthogonal spaces`.
+sets of uniform vectors separated by 1 Å from 2 to 8 dimensions (1.05 Å in 3 dimensions) can be accessed in the [points](https://github.com/antonielgomes/dpMD/tree/main/PDIM/points) directory.
+They can be used as weights for combining vectors in `orthogonal spaces`.
 
 ### Code availability
-**PDIM** is written in `Python` and uses `numpy` and `scipy` libraries for calculations. The code is available ([PDIM.py](https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.py)) for those who are interested to optimize it according to their own needs. However, a standalone executable is available for [Linux](https://google.com) and [Windows](https://google.com).
+PDIM is written in `Python` and uses `numpy` and `scipy` libraries for calculations. The code is available ([PDIM.py](https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.py)) for those who are interested to optimize it according to their own needs. However, a standalone executable is available for [Linux](https://google.com) and [Windows](https://google.com).
 
 ### Usage
 PDIM reads input variables directly from the command line:
