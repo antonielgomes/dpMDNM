@@ -10,7 +10,7 @@ Examples of the minimization progress can be observed in [two](https://youtu.be/
 
 This script was devised to boost `protein conformational changes` using normal modes. We mapped the `normal mode space` into an `Euclidean space` for a **rational** normal mode combination and protein conformational exploration.
 
-sets of uniform vectors separated by 1 Å from 2 to 8 dimensions (1.05 Å in 3 dimensions) can be accessed in the [points](https://github.com/antonielgomes/dpMD/tree/main/PDIM/points) directory.
+Sets of uniform vectors separated by 1 Å from 2 to 8 dimensions (1.05 Å in 3 dimensions) can be accessed in the [points](https://github.com/antonielgomes/dpMD/tree/main/PDIM/points) directory.
 They can be used as weights for combining vectors in `orthogonal spaces`.
 
 ### Code availability
