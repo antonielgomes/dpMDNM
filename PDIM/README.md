@@ -6,6 +6,8 @@ In other words, normalized vectors (radius = 1) are randomly distributed in a un
 
 This script was devised to boost `protein conformational changes` using normal modes. We mapped the `normal mode space` into an `Euclidean space` for a **rational** normal mode combination and protein conformational exploration.
 
+Normal mode combined vectors separated by 1 Å from 2 to 8 dimensions (1.05 Å in 3 dimensions) can be accessed in the [points](https://github.com/antonielgomes/dpMD/tree/main/PDIM/points) directory.
+
 
 The methods developed in this work can be adapted to any NM vectors obtained from other techniques, such as elastic network models (Tirion, 1996; Bahar et al., 1997; Haliloglu et al., 1997; Atilgan et al., 2001), Rotation-Translation-Block (RTB) (Tama et al., 2000), internal coordinate NMs (iNMA) (Frezza & Lavery, 2019), nonlinear rigid block NM (NOLB) (Hoffmann & Grudinin, 2017) or even from Principal Component Analysis (PCA) obtained by standard MD simulations (Kanada et al., 2022) or experimental conformations (Costa et al., 2023).
 The prMD approach offers a framework for protein conformational studies beyond simply exploring the NM space. By treating a set of combined NM vectors, one can compare them and identify neighbor vectors that describe potential pathways for targeted displacements, either towards a known conformation or uncharted regions of the NM space. Moreover, the capability of prMD to quantify the energetic cost of displacing a protein along a specific NM vector becomes valuable. This feature can be useful when focusing on low-energy regions of the NM space, indicating likely pathways toward experimental conformations, as demonstrated in the case of Lysozyme. Altogether, the prMD approach can potentially investigate the functional aspects of various other proteins.
@@ -88,3 +90,8 @@ bash scripts/tmd-equil-namd.sh
 bash scripts/tmd-free-md-namd.sh
 ```
 
+
+orges-Araújo [^1][^2]; Ana C. Borges-Araújo [^1]; Tugba Nur Ozturk[^3]; Daniel P. Ramirez-Echemendia[^4]; Balázs Fábián [^5]; Timothy S. Carpenter[^3]; Sebastian Thallmair [^6]; Jonathan Barnoud [^7][^8]; Helgi I. Ingólfsson[^3]; Gerard Hummer [^5]; D. Peter Tieleman[^4]; Siewert J. Marrink [^9]; Paulo C. T. Souza [^2]; Manuel N. Melo [^1]
+
+[^1]: Instituto de Tecnologia Química e Biológica António Xavier, Universidade Nova de Lisboa, Av. da República, 2780-157, Oeiras, Portugal;
+[^2]: M
