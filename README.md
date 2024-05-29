@@ -1,6 +1,6 @@
 # dpMD
 
-This repository contains all files necessary to perform `distributed-points Molecular Dynamics` (dpMD), an enhanced-sampling approach that allows a large protein conformational sampling based on `normal modes` (NM). dpMD generates harmonically restrained structures along NM vectors that are further relaxed with standard MD simulations to fill the conformational space efficiently.
+This repository contains all files necessary to perform `distributed-points Molecular Dynamics` (dpMD), an enhanced-sampling approach that allows a large protein conformational sampling based on `normal mode` (NM) vectors. dpMD generates harmonically restrained structures along NM vectors that are further relaxed with standard MD simulations to fill the conformational space efficiently.
 
 The main novelty of dpMD is uniformly distributed vectors
 induces a given protein to explore conformation along normal mode vectors
@@ -10,11 +10,11 @@ induces a given protein to explore conformation along normal mode vectors
 dpMD is composed of three stages:
 <p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/dpMD.png" width="1000"/></p>
 
-### Why using pdMD?
-The imposed positional restraints along uniformly combined NM vectors allow extensive conformational sampling of proteins, outperforming the powerful enhanced-sampling method developed by our team called [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003). Therefore, dpMD is a promising alternative for conducting protein conformational sampling, including:
+### Why using dpMD?
+The imposed positional restraints along uniformly combined NM vectors allows extensive conformational sampling of proteins, outperforming the powerful enhanced-sampling method developed by our team called [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003). Therefore, dpMD is a promising alternative for conducting protein conformational sampling, providing valuable contributions in the field, such as:
 - Rational protein conformational sampling.
 - Systematic exploration of the NM space.
-- Broad coverage of experimental structures.
+- Coverage of experimental structures.
 - Identification of enegertically favorable regions in the conformational space.
 - Insights into dynamical and functional aspects of proteins.
 
