@@ -2,7 +2,7 @@
 
 **PDIM** (**P**oints in **DIM**ensions) is a minimization script that distibutes N points on the surface of a D-dimensional unit-sphere according to an energetic potential of repulsion function E.
 
-In other words, normalized vectors (radius = 1) are randomly placed in a unit-sphere, then minimized to generate a uniform distribution.
+In other words, normalized vectors are randomly placed in a unit-sphere, then minimized to generate a uniform distribution.
 
 <p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.png" width="1000"/></p>
 
