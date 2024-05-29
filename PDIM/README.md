@@ -1,9 +1,22 @@
 # PDIM
 
-**PDIM** (**P**oints in N **DIM**ensions) is a minimization script that distibutes P points in the surface of an N-sphere.
+**PDIM** (**P**oints in **DIM**ensions) is a minimization script that distibutes N points on the surface of a D-dimensional unit-sphere according to an energetic potential of repulsion function E.
+
+In other words, normalized vectors (radius = 1) are randomly distributed in a unit-sphere, then minimized to generate a uniform distribution.
+
+This script was devised to boost `protein conformational changes` using normal modes. We mapped the `normal mode space` into an `Euclidean space` for a **rational** normal mode combination and protein conformational exploration.
+
+
+The methods developed in this work can be adapted to any NM vectors obtained from other techniques, such as elastic network models (Tirion, 1996; Bahar et al., 1997; Haliloglu et al., 1997; Atilgan et al., 2001), Rotation-Translation-Block (RTB) (Tama et al., 2000), internal coordinate NMs (iNMA) (Frezza & Lavery, 2019), nonlinear rigid block NM (NOLB) (Hoffmann & Grudinin, 2017) or even from Principal Component Analysis (PCA) obtained by standard MD simulations (Kanada et al., 2022) or experimental conformations (Costa et al., 2023).
+The prMD approach offers a framework for protein conformational studies beyond simply exploring the NM space. By treating a set of combined NM vectors, one can compare them and identify neighbor vectors that describe potential pathways for targeted displacements, either towards a known conformation or uncharted regions of the NM space. Moreover, the capability of prMD to quantify the energetic cost of displacing a protein along a specific NM vector becomes valuable. This feature can be useful when focusing on low-energy regions of the NM space, indicating likely pathways toward experimental conformations, as demonstrated in the case of Lysozyme. Altogether, the prMD approach can potentially investigate the functional aspects of various other proteins.
+
+
+
+
+
 
 ### Code availability
-**PDIM** is written in `Python` and uses libraries, such as `numpy` and `scipy` for calculations. However **PDIM** is also available in a compiled version for [Linux](https://google.com) and [Windows](https://google.com).
+**PDIM** is written in `Python` and uses `numpy` and `scipy` libraries for calculations. The code is free for anyone who is interested to optimize it according to their own needs. However, a standalone executable is available for [Linux](https://google.com) and [Windows](https://google.com).
 
 
 ### Reference
