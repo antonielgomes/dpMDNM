@@ -4,7 +4,7 @@
 
 In other words, normalized vectors (radius = 1) are randomly placed in a unit-sphere, then minimized to generate a uniform distribution.
 
-<p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/PDIM.png" height="280"/></p>
+<p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/PDIM.png" width="1000"/></p>
 
 
 This script was devised to boost `protein conformational changes` using normal modes. We mapped the `normal mode space` into an `Euclidean space` for a **rational** normal mode combination and protein conformational exploration.
