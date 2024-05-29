@@ -21,7 +21,7 @@ The imposed positional restraints along uniformly combined NM vectors allows ext
 - Identification of enegertically favorable regions in the conformational space.
 - Insights into dynamical and functional aspects of proteins.
 
-dpMD is **versatil**, being adaptable to `any NM vectors` obtained from other techniques or even from `Principal Component Analysis (PCA)` obtained by standard MD simulations or experimental conformations.
+dpMD can be adapted to `any NM vectors` obtained from other techniques or even from `Principal Component Analysis (PCA)` obtained by standard MD simulations or experimental conformations.
 
 ### Reference
 If you use PDIM or dpMD, please refer to the following publication:
