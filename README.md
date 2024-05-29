@@ -2,18 +2,7 @@
 
 `distributed-points Molecular Dynamics` (dpMD) is an enhanced-sampling approach that allows a large protein conformational sampling based on `normal mode` (NM) vectors. dpMD generates harmonically restrained structures along NM vectors that are further relaxed with standard MD simulations to fill the conformational space.
 
-NM-based conformational sampling methods highly deppend on the set of NM vectors for an extensive and roboustness protein conformational exploration. Thus, we developed a minimization script called [PDIM](https://github.com/antonielgomes/dpMD/tree/main/PDIM), which generates uniformly distributed NM vectors that are further utilized in dpMD.
-
-While developping dpMD, we focused
-Considering the interest
-A notable novelty of dpMD is the use of a uniform set of vectors, obtained by 
-To date, protein conformational exploration Altogether, these pieces of evidence show that an optimal strategy to produce and select linear combinations of NMs would be of great value in the context of enhanced sampling strategies. Further, there is still a need to understand how wholly and extensively the subspace described by low-frequency NMs is being explored. The present work addresses these points by presenting a minimization algorithm yielding an optimal distribution for the orientations of a set of NM combined vectors used for generating protein conformations to be subsequently submitted to standard MD for efficient protein conformational sampling.
-The main novelty of dpMD is uniformly distributed vectors
-induces a given protein to explore conformation along normal mode vectors
-
-
-dpMD is composed of three stages:
-<p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/dpMD.png" width="1000"/></p>
+NM-based enhanced-sampling methods highly deppend on the set of NM vectors for an extensive protein conformational exploration. Thus, we developed a minimization script called [PDIM](https://github.com/antonielgomes/dpMD/tree/main/PDIM), which generates `uniformly distributed NM vectors` that are further utilized to explore the protein conformational space with dpMD.
 
 ### Why using dpMD?
 The imposed positional restraints along uniformly combined NM vectors allows extensive conformational sampling of proteins, outperforming the powerful enhanced-sampling method developed by our team called [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003). Therefore, dpMD is a promising alternative for conducting protein conformational sampling, providing valuable contributions in the field, such as:
@@ -24,6 +13,12 @@ The imposed positional restraints along uniformly combined NM vectors allows ext
 - Insights into dynamical and functional aspects of proteins.
 
 dpMD can be adapted to `any NM vectors` obtained from other techniques or even from `Principal Component Analysis (PCA)` obtained by standard MD simulations or experimental conformations.
+
+### How dpMD works?
+
+dpMD is composed of three stages:
+<p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/dpMD.png" width="1000"/></p>
+
 
 ### Reference
 If you use PDIM or dpMD, please refer to the following publication:
