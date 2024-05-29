@@ -39,6 +39,11 @@ They are meaningful for monitoring the quality and `convergence` of data.
 - The initial set of points is completely random, thus distinct final set of points is expected. It is reasonable to consider performing several runs and select the one with `higher` Mdist or Mangle.
 - Higher `s` means a higher energy. This explains why E is higher in a new cycle. Compare the energy values only `within a cycle`.
 
+### Contact
+Questions or suggestions should be addressed to antonielaugusto@gmail.com
+
+### Reference
+If you use PDIM or dpMD, please refer to the following publication:
 
 A [^1]
 
