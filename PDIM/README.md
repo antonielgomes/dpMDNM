@@ -48,8 +48,6 @@ They are meaningful for monitoring the quality and `convergence` of data.
 Questions or suggestions should be addressed to antonielaugusto@gmail.com
 
 ### Reference
-If you use PDIM or dpMD, please refer to the following publication:
-
+<!-- If you use PDIM or dpMD, please refer to the following publication:
 A [^1]
-
-[^1]: A
+[^1]: A -->
