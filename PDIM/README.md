@@ -6,6 +6,7 @@ In other words, normalized vectors (radius = 1) are randomly placed in a unit-sp
 
 <p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.png" width="1000"/></p>
 
+Minimization progress of examples in [two](https://youtu.be/p4m_wOLcfo4) and [three](https://youtu.be/elFgtv4bCA0) dimensions.
 
 This script was devised to boost `protein conformational changes` using normal modes. We mapped the `normal mode space` into an `Euclidean space` for a **rational** normal mode combination and protein conformational exploration.
 
