@@ -10,13 +10,10 @@ Normal mode combined vectors separated by 1 Å from 2 to 8 dimensions (1.05 Å i
 These values can be used as weights for combining vectors in `orthogonal spaces`.
 
 ### Code availability
-**PDIM** is written in `Python` and uses `numpy` and `scipy` libraries for calculations. The code is free ([PDIM.py](https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.py))for anyone who is interested to optimize it according to their own needs. However, a standalone executable is available for [Linux](https://google.com) and [Windows](https://google.com).
-
-### Cite us!
-If you use PDIM or dpMD, please refer to the following publication:
+**PDIM** is written in `Python` and uses `numpy` and `scipy` libraries for calculations. The code is available ([PDIM.py](https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.py)) for those who are interested to optimize it according to their own needs. However, a standalone executable is available for [Linux](https://google.com) and [Windows](https://google.com).
 
 ### Usage
-PDIM incorporates variables directly from the command line:
+PDIM reads input variables directly from the command line:
 ```
 ./PDIM.py -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
 ```
@@ -26,25 +23,23 @@ python3.8 PDIM.py -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
 ```
 In this example, 10 points (-p, integer) are distributed in a sphere of 3 dimensions (-d, integer). 10 minimization cycles (-c, integer) are performed, with a tolerance energy (-t, float) of 0.001 per cycle. The classical minimization algorithm (-m, string) is used, without outputting every minimization step (-o, string). The expoent s is incremented (-s, string) by a power of 2 after every minimization cycle.
 
-PDIM generates `start.txt` and `points.txt` files, corresponding to the initial and the final sets of points, respectively.
+PDIM generates `start.txt` and `points.txt` files, which correspond to the initial and final sets of points, respectively.
 
 During minimization, the following variables are printed in every step:
 - Mdist: minimal euclidean distance of the system
 - Mangle: minimal angle of the system
 - Energy: energy of the system
 
+They are meaningful for monitoring the quality and `convergence` of data.
+
 ### Tips
-- Where can I chat with other ColabFold users?
-  - See our [Discord](https://discord.gg/gna8maru7d) channel!
-
-### FAQ
-- Why
-  - Points are generated randomly and further minimized. Sometimes, it is required several runs to obtain the best distribution of points.
-- Why is nergy higher in a new cicle?
-  - This is due the s increment, which increases E.
+- Performance is highly reduced as higher dimensions are considered. Consider using the `mirrored` algorithm. In this case, a `even number` of vectors is mandatory.
+- Sometimes the convergence requires a smooth minimization progress. In such cases, consider using the `-s sum` flag.
+- Although a rigorous convergence tolerance (-t) slows down the minimization progress, it is likely to obtain a better final set of points. Consider using `lower values`, such as 0.00001. 
+- The initial set of points is completely random, thus distinct final set of points is expected. It is reasonable to consider performing several runs and select the one with `higher` Mdist or Mangle.
+- Higher `s` means a higher energy. This explains why E is higher in a new cycle. Compare the energy values only `within a cycle`.
 
 
-orges-Araújo [^1][^2]; Ana C. Borges-Araújo [^1]; Tugba Nur Ozturk[^3]; Daniel P. Ramirez-Echemendia[^4]; Balázs Fábián [^5]; Timothy S. Carpenter[^3]; Sebastian Thallmair [^6]; Jonathan Barnoud [^7][^8]; Helgi I. Ingólfsson[^3]; Gerard Hummer [^5]; D. Peter Tieleman[^4]; Siewert J. Marrink [^9]; Paulo C. T. Souza [^2]; Manuel N. Melo [^1]
+A [^1]
 
-[^1]: Instituto de Tecnologia Química e Biológica António Xavier, Universidade Nova de Lisboa, Av. da República, 2780-157, Oeiras, Portugal;
-[^2]: M
+[^1]: A
