@@ -10,7 +10,7 @@ Normal mode combined vectors separated by 1 Å from 2 to 8 dimensions (1.05 Å i
 These values can be used as weights for combining vectors in `orthogonal spaces`.
 
 ### Code availability
-**PDIM** is written in `Python` and uses `numpy` and `scipy` libraries for calculations. The code is free for anyone who is interested to optimize it according to their own needs. However, a standalone executable is available for [Linux](https://google.com) and [Windows](https://google.com).
+**PDIM** is written in `Python` and uses `numpy` and `scipy` libraries for calculations. The code is free ([PDIM.py](https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.py))for anyone who is interested to optimize it according to their own needs. However, a standalone executable is available for [Linux](https://google.com) and [Windows](https://google.com).
 
 
 ### Reference
