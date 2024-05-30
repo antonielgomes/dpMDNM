@@ -9,7 +9,7 @@ Before performing conformational samping with dpMD, a `preparation` step is nces
 Once all these information are ready, dpMD is be performed in three stages:
 <p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/dpMD.png" width="1000"/></p>
 
-- First stage: the same (vacuum minimizeed) structure used in NM calculations is subjected to a series of positional restraints potentials to generate structures properly distributed along NM vectors using [VMOD](https://doi.org/10.1016/0010-4655(95)00052-H). This stage is performed with [CHARMM](https://www.charmm.org/).
+- First stage: the same (vacuum minimized) structure used in NM calculations is subjected to a series of positional restraints potentials to generate structures properly distributed along NM vectors using [VMOD](https://doi.org/10.1016/0010-4655(95)00052-H). This stage is performed with [CHARMM](https://www.charmm.org/).
 - Second stage: [Targeted Molecular Dynamics (TMD)](https://doi.org/10.1080/08927029308022170) simulations are conducted for the solvated system, driving the protein towards those structures obtained in the first stage. This stage is performed with [NAMD](http://www.ks.uiuc.edu/Research/namd/).
 - Third stage: all solvated conformations obtained in the preciding stage are further equilibrated and submitted to standard MD simulations to obtain an equilibrated unbiased conformational ensemble. These last two stages were performed with NAMD. This stage is performed with [NAMD](http://www.ks.uiuc.edu/Research/namd/).
 
