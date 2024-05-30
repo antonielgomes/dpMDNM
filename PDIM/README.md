@@ -19,11 +19,11 @@ PDIM is written in `Python` and uses `numpy` and `scipy` libraries for calculati
 ### Usage
 PDIM reads input variables directly from the command line:
 ```
-./PDIM -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
-```
-or using the python script:
-```
 python3.8 PDIM.py -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
+```
+or using the standalone script:
+```
+./PDIM -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
 ```
 In this example, 10 points (-p, integer) are distributed in a sphere of 3 dimensions (-d, integer). 10 minimization cycles (-c, integer) are performed, with a tolerance energy (-t, float) of 0.001 per cycle. The classical minimization algorithm (-m, string) is used, without outputting every minimization step (-o, string). The expoent s is incremented (-s, string) by a power of 2 after every minimization cycle.
 
