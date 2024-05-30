@@ -47,7 +47,8 @@ They are meaningful for monitoring the quality and `convergence` of data.
 ### Contact
 Questions or suggestions should be addressed to antonielaugusto@gmail.com
 
-### Reference
-<!-- If you use PDIM or dpMD, please refer to the following publication:
+
+<!-- ### Reference
+If you use PDIM or dpMD, please refer to the following publication:
 A [^1]
 [^1]: A -->
