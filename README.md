@@ -10,14 +10,15 @@ dpMD is composed of three stages:
 <p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/dpMD.png" width="1000"/></p>
 
 ### Why using dpMD?
-The imposed positional restraints along uniformly combined NM vectors allows extensive conformational sampling of proteins, outperforming the powerful enhanced-sampling method developed by our team called [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003). Therefore, dpMD is a promising alternative for conducting protein conformational sampling, providing valuable contributions in the field, such as:
+
+The imposed positional restraints along uniformly combined NM vectors followed by standard MD simulations performed by dpMD allows generatining an extensive conformational exploration, outperforming the powerful enhanced-sampling method developed by our team called [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003). Therefore, dpMD is a promising alternative for conducting protein conformational sampling, providing valuable contributions in the field, such as:
 - Rational protein conformational sampling.
 - Systematic exploration of the NM space.
 - Coverage of experimental structures.
 - Identification of enegertically favorable regions in the conformational space.
 - Insights into dynamical and functional aspects of proteins.
 
-dpMD can be adapted to `any NM vectors` obtained from other techniques or even from `Principal Component Analysis (PCA)` obtained by standard MD simulations or experimental conformations.
+In addition, dpMD can be adapted to `any NM vectors` obtained from other techniques or even from `Principal Component Analysis (PCA)` obtained by standard MD simulations or experimental conformations.
 
 
 ### Reference
