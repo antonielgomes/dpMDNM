@@ -26,16 +26,10 @@ The imposed positional restraints along uniformly combined NM vectors followed b
 
 In addition, dpMD can be adapted to `any NM vectors` obtained from other techniques or even from `Principal Component Analysis (PCA)` obtained by standard MD simulations or experimental conformations.
 
+### Tutorial: hen egg-white Lysozyme
 
-### Reference
-If you use PDIM or dpMD, please refer to the following publication:
+[Lysozyme](https://www.rcsb.org/structure/3LZT)
 
-### FAQ
-- W
-  - S
-
-### FAQ
-Testar **name** and **DISTINCT** name
 calculate `normal modes`
 ```
 charmm -i scripts/normal-modes.inp
@@ -98,3 +92,5 @@ bash scripts/tmd-equil-namd.sh
 bash scripts/tmd-free-md-namd.sh
 ```
 
+<!-- ### Reference
+If you use PDIM or dpMD, please refer to the following publication: -->
