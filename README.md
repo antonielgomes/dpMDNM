@@ -50,16 +50,7 @@ bash scripts/mdenm-modes-combination.sh
 
 combine normal modes
 ```
-charmm -i scripts/generate-combined-modes.inp ncomb=6
-```
-
-**MDeNM**
-```
-scripts/mdenm-namd-exc.sh
-```
-
-```
-scripts/mdenm-namd-md.sh
+charmm -i scripts/normal-mode-combination.inp ncomb=6
 ```
 
 **VMOD**
@@ -90,6 +81,16 @@ bash scripts/tmd-equil-namd.sh
 
 ```
 bash scripts/tmd-free-md-namd.sh
+```
+
+
+### Bonus: **MDeNM**
+```
+scripts/mdenm-namd-exc.sh
+```
+
+```
+scripts/mdenm-namd-md.sh
 ```
 
 <!-- ### Reference
