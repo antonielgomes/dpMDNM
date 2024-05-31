@@ -1,0 +1,28 @@
+* CRYSTAL SYMMETRY PARAMETERS
+*  DATE:     2/18/20     10:21:35      CREATED BY USER: agomes
+*
+ SYMMETRY
+ (X,Y,Z)                                 
+ END
+
+ IMAGES
+ ! Operation     A     B     C
+           1    -1     0    -1
+           1     0     0    -1
+           1     1     0    -1
+           1    -1     0     0
+           1     0    -1     0
+           1     1    -1     0
+           1     1     0     0
+           1    -1     0     1
+           1     0    -1     1
+           1     0     0     1
+           1     1    -2     1
+           1     1    -1     1
+           1     1     0     1
+           1     0     1     0
+           1    -1     1     0
+           1     0     1    -1
+           1    -1     2    -1
+           1    -1     1    -1
+ END
