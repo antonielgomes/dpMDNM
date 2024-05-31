@@ -17,7 +17,7 @@ The ensemble of structures obtained in the third stage corresponds to the confor
 
 ### Why using dpMD?
 
-The imposed positional restraints along uniformly combined NM vectors followed by standard MD simulations performed by dpMD allows generatining an extensive conformational exploration, outperforming the powerful enhanced-sampling method developed by our team called [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003). Therefore, dpMD is a promising alternative for conducting protein conformational sampling, providing valuable contributions in the field, such as:
+The imposed positional restraints along uniformly combined NM vectors followed by standard MD simulations allows dpMD generatining an extensive conformational exploration, outperforming the powerful enhanced-sampling method developed by our team called [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003). Therefore, dpMD is a promising alternative for conducting protein conformational sampling, providing valuable contributions in the field, such as:
 - Rational protein conformational sampling.
 - Systematic exploration of the NM space.
 - Coverage of experimental structures.
