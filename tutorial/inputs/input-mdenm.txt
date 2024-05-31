@@ -1,3 +1,0 @@
-5.0		! temperature input (K)
-10		! number of excitations
-rep		! output name
