@@ -26,25 +26,25 @@ As dpMD uses normal modes (NMs) to obtain large conformational exploration, they
 The minimized structure are available in crd and pdb files, filling the b-factor column with NM fluctuations in angstrom (`minimized-angstrom`), as a magnitude vector (`minimized-b-factor`) and as b-factor (`minimized-vector-magnitude`). The `modes.mod` contains all calculated NMs.
 
 This protocol provides [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) for performing NM calculations.
-The first 100 low-frequeny NMs can be by running the following command:
+100 low-frequeny NMs can be calculated running the following command:
 ```
 charmm -i scripts/normal-modes.inp nmodes=100
 ```
-Following, NMs can be written as coordinates vectors or trajectories. Here, only the first 14 low-frequency NMs will be generated:
+Following, NMs can be written as coordinate vectors or trajectories. Here, only the first 14 low-frequency NMs will be generated:
 ```
 charmm -i scripts/normal-modes-dcd-crd.inp nmodes=14
 ```
 ### Normal mode combinations
-To obtain uniformly combined set of NM vectors, the input files `input-modes.txt` - containing the uniformly distributed set of vectors obtained from [PDIM](https://github.com/antonielgomes/dpMD/tree/main/PDIM) - and `list-modes.txt` - containing the NM numbers will be provided. Both are available into the [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) directory.
-In this tutorial, six combinations (`ncomb`, number of vectors) will be generated, while it will be read only the first 14 low-frequency NMs (`nmodes`).
+To obtain uniformly combined set of NM vectors, the input files `input-modes.txt` - containing the uniformly distributed set of vectors obtained from [PDIM](https://github.com/antonielgomes/dpMD/tree/main/PDIM) - and `list-modes.txt` - containing the NM numbers - should be provided. Both are available into the [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) directory.
+In this tutorial, six combinations (`ncomb`, number of vectors) of two NMs will be generated, while it will be read only the first 14 low-frequency NMs (`nmodes`).
 ```
 charmm -i scripts/normal-mode-combination.inp ncomb=6 nmodes=14 inputfile=./inputs/input-modes.txt listmodes=./inputs/list-modes.txt 
 ```
-**NOTE:** Each column weights a NM. Certify that the number of modes in `list-modes.txt` (two modes, 7 and 8) corresponds to the number of dimensions (columns) in the `input-modes.txt` file (two columns, one for modes 7 and another for 8).
+**NOTE:** Each row is a combination and each column is aNM weight. Certify that the number of modes in `list-modes.txt` (two modes, 7 and 8) corresponds to the number of dimensions (columns) in the `input-modes.txt` file (two columns, one for modes 7 and another for 8). For three modes, three columns per combination (row) should be provided.
 
 ### dpMD: first stage
 ##### Generating structures along combined normal modes with VMOD
-In this step, the vacuum minimized structure will be displaced along all uniformly combined NM vectors using the `vmod.inp` script, located into the [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) directory. This step can be done automatically by running `vmod.sh` script in bash:
+In this step, the vacuum minimized structure used in NM calculations will be displaced along all uniformly combined NM vectors using the `vmod.inp` script, located into the [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) directory. This step can be done automatically by running `vmod.sh` script in bash:
 ```
 bash scripts/vmod.sh
 ```
