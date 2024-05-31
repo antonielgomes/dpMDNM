@@ -1,0 +1,133 @@
+* NORMAL MODE COMBINATION TO A MOD FILE
+* WEIGHTS ARE USED AS INPUT
+* TRAJECTORIES TO DCD FILES
+* VECTORS TO CRD FILES
+* Antoniel A. S. Gomes & D. Perahia (2024)
+*
+
+DIMENS CHSIZE 3000000 MAXRES 3000000
+
+! Read topology and parameter files
+stream toppar.str
+
+! Read PSF
+open read unit 10 card name ./inputs/step3.psf
+read psf  unit 10 card xplor
+
+! Read Coordinate
+!!reading charmm file coordinate
+!open read unit 10 card name ./crd/step6.crd
+!read coor unit 10 card
+read namd file "./inputs/step6.coor"
+
+stream ./inputs/step3.str
+
+define PROT sele ( @PROT ) end
+delete atoms sele .not. PROT end
+define PROT sele ( @PROT ) end
+
+! store structure coordinates (for generating dcd files properly)
+scalar x +sto 1
+scalar y +sto 2
+scalar z +sto 3
+
+! define comp as 1 to fill the combined normal mode file
+scalar xcomp set 1
+scalar ycomp set 1
+scalar zcomp set 1
+
+! generate directory for crd and dcd file
+
+system "mkdir -p ./modes/combined-modes/crd/"
+system "mkdir -p ./modes/combined-modes/dcd/"
+
+! iterate to generate @ncomb combined normal modes
+set combnu = 1
+
+! creat mod file for normal mode combination
+open write file unit 42 name ./modes/combined-modes.mod
+
+vibran nmodes @ncomb
+set count = 1
+label includemode
+edit incl comp to @count
+incr count by 1
+if @count .lt. @ncomb goto includemode
+write norm file unit 42 mode 1 thru @ncomb
+* Linear combination of normal modes
+*
+end
+close unit 42
+
+label combinations
+  
+  scalar x set 0
+  scalar y set 0
+  scalar z set 0
+  scalar xcomp set 0
+  scalar ycomp set 0
+  scalar zcomp set 0
+  
+  ! read modes from input file
+  open read card unit 13 name @inputfile
+
+  ! define column nomber to get the correct weight value
+  set col = 1
+
+  label combine
+
+    get modnu unit 13
+    if modnu .eq. END-OF-FILE goto writemode
+
+    ! puts weight to a file, then reads as input
+    system "sed ''@COMBNU'q;d' `echo '@LISTMODES'| awk '{print tolower($0)}'` | awk '{print $'@COL'}' > weight"
+    open unit 2 read card name ./weight
+    get weight unit 2
+    close unit 2
+
+    ! adds weight to the vector
+    open read file unit 41 name ./modes/modes.mod
+    vibran nmodes @nmodes
+    read norm file unit 41 mode 1 thru @nmodes
+    fill comp mode @modnu fact @weight
+    end
+
+    ! sum vectors
+    scalar x SUM xcomp
+    scalar y SUM ycomp
+    scalar z SUM zcomp
+    
+    incr col by 1
+  goto combine
+  
+  label writemode
+
+    ! adds combined vector to main coordinates
+    scalar xcomp = x
+    scalar ycomp = y
+    scalar zcomp = z
+
+    ! recall structure coordinates
+    scalar x recall 1
+    scalar y recall 2
+    scalar z recall 3
+
+    ! fills the combined normal modes file
+    open read file unit 42 name ./modes/combined-modes.mod
+    vibran nmodes @ncomb
+    read norm file unit 42 mode 1 thru @ncomb
+    edit incl comp to 1
+    open write file unit 10 name ./modes/combined-modes/dcd/mode-@combnu.dcd
+    open write card unit 12 name ./modes/combined-modes/crd/mode-@combnu.crd
+    write traj mode 1 mrms 2 phase 7.2 unit 10
+    fill comp mode 1 fact 1.0
+    coor write card comp unit 12
+    *  COMBINED NORMAL MODE VECTOR @combnu
+    *
+    
+    end
+    incr combnu by 1
+  if @combnu .le. @ncomb goto combinations
+! remove the weight file
+system "rm weight"
+stop
