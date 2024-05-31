@@ -1,4 +1,4 @@
-# Running distribited-points Molecular Dynamics
+# Running distributed-points Molecular Dynamics
 
 In this tutorial, dpMD is applied to [Lysozyme](https://www.rcsb.org/structure/3LZT), a classical example.
 dpMD was implemented to extract the best of two worlds: [CHARMM](https://www.charmm.org/) is used for normal mode calculations and file processing, while [NAMD](http://www.ks.uiuc.edu/Research/namd/) is used as MD engine. Therefore, **both programs must be installed, and paths must be updated in all bash scripts used in this tutorial**. In addition, additional flags (number of processos, GPU usage, etc.) should be also updated.
