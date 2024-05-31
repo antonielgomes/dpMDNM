@@ -8,7 +8,7 @@ DIMENS CHSIZE 3000000 MAXRES 3000000
 stream toppar.str
 
 ! Read PSF
-open read unit 10 card name ./param/step3.psf
+open read unit 10 card name ./inputs/step3.psf
 read psf  unit 10 card xplor
 
 ! Read Coordinate
@@ -22,13 +22,13 @@ read namd file "inputs/step6.coor"
 
 !WARNING: NO HESSIAN WITH IMAGES
 
-stream ./param/step3.str
+stream ./inputs/step3.str
 
 !
 ! Image Setup
 !
 
-!open read unit 10 card name ./param/crystal_image.str
+!open read unit 10 card name ./inputs/crystal_image.str
 !CRYSTAL DEFINE @XTLtype @A @B @C @alpha @beta @gamma
 !CRYSTAL READ UNIT 10 CARD
 
@@ -119,7 +119,7 @@ set rmsd = ?RMS
 ! N = number of atoms
 ! first 6 degrees of freedom are translationals/rotationals
 ! Usually 200 modes is enough
-! 200 nmodes result in 103 modes: (NMODes+6)/2 = 103
+! 200 nmodes result in 103 basis vectors: (NMODes+6)/2 = 103
 ! nblocks : approximated number of atoms per block
 ! PARDim  : block length limit (default = 200)
 ! CUTFreq : modes with frequency below to CUTF will be calculated
@@ -133,15 +133,14 @@ system "mkdir modes"
 
 open write file unit 41 name ./modes/modes.mod
 
-set basis = 100
-calc nmodes = ( @basis * 2 ) - 6
+calc basis = ( @nmodes * 2 ) - 6
 !calc nmodes = ( @basis + 6 ) / 2
 
-vibran nmodes @nmodes
+vibran nmodes @basis
 
 dimb cutf 30 iter 1000 tole @tol savf 100 iunmod 41 pard @pardim
 
-write norm file unit 41 mode 1 thru @nmodes
+write norm file unit 41 mode 1 thru @basis
 * Normal Modes of Protein
 * @nmodes Normal Modes Calculated
 *
