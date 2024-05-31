@@ -86,21 +86,21 @@ In a further step, we improved MDeNM efficaty by using uniformly combined NMs, i
 - MDeNM input parameters: excitation temperature, number of replicas, and output names are inside the `input-mdenm.txt` file.
 - MDeNM preparation: `mdenm-combined-modes.inp` generates the excitation vector for every combined NM mode.
 - NAMD directory:
-  - FILES
+  - Python scripts `charmm_vector_namd.py` - for converting charmm coordinates to the namd format - and `namd_vectors_sum.py` - for generating the excited system inputs.
+  - NAMD scripts `namd-exc.inp` - for performing excitation steps - and `namd-free-md.inp` - for performing standard free-md of each excitation.
 
-`charmm_vector_namd.py`
-`namd_vectors_sum.py`
-NAMD
-charmm_vector_namd.py  namd-exc.inp  namd-md.inp  namd_vectors_sum.py
+In the first step, running scripts: `mdenm-combined-modes.sh` - for preparing all directories and files for each combined NM.generating the excitation vector
+`mdenm-namd-exc.sh` `mdenm-namd-free-md.sh`
 
-running the `dpmd-free-md.inp` script. This step can be done automatically by running `mdenm-namd-exc.sh` script in bash:
+`vectormodes.crd`
+running the `dpmd-free-md.inp` script. This step can be done automatically by running `mdenm-combined-modes.sh` script in bash:
 
 ```
 bash scripts/mdenm-namd-exc.sh
 ```
 
 ```
-scripts/mdenm-namd-md.sh
+scripts/mdenm-namd-free-md.sh
 ```
 
 ### Contact
