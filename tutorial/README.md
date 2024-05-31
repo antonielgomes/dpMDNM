@@ -26,9 +26,9 @@ As dpMD uses normal modes (NMs) to obtain large conformational exploration, they
 The minimized structure are available in crd and pdb files, filling the b-factor column with NM fluctuations in angstrom (`minimized-angstrom`), as a magnitude vector (`minimized-b-factor`) and as b-factor (`minimized-vector-magnitude`). The `modes.mod` contains all calculated NMs.
 
 This protocol provides [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) for performing NM calculations.
-The first 194 low-frequeny NMs can be by running the following command:
+The first 100 low-frequeny NMs can be by running the following command:
 ```
-charmm -i scripts/normal-modes.inp
+charmm -i scripts/normal-modes.inp nmodes=100
 ```
 Following, NMs can be written as coordinates vectors or trajectories. Here, only the first 14 low-frequency NMs will be generated:
 ```
