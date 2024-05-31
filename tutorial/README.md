@@ -1,5 +1,5 @@
 In this tutorial, dpMD is applied to [Lysozyme](https://www.rcsb.org/structure/3LZT), a classical example.
-dpMD was implemented to extract the best of two worlds: [CHARMM](https://www.charmm.org/) is used for normal mode calculations and file processing, while [NAMD](http://www.ks.uiuc.edu/Research/namd/) is used as MD engine.
+dpMD was implemented to extract the best of two worlds: [CHARMM](https://www.charmm.org/) is used for normal mode calculations and file processing, while [NAMD](http://www.ks.uiuc.edu/Research/namd/) is used as MD engine. Therefore, **both programs must be installed**.
 All necessary [inputs](https://github.com/antonielgomes/dpMD/tree/main/tutorial/inputs) and [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) files can be downloaded for performing dpMD locally.
 
 ### System files
@@ -18,50 +18,30 @@ Before performing dpMD, the following input files for CHARMM and NAMD are requir
 
 All these files can be generate using the [CHARMM-GUI](https://www.charmm-gui.org/) server.
 
+### Normal mode calculations
+As dpMD uses normal modes (NMs) to obtain large conformational exploration, they must be calculated and provided as `mass-weighted` coordinate files. Although NMs can be calculated by several tools, this tutorial uses [CHARMM](https://www.charmm.org/), which minimizes the equilibrated protein in vacuum and then calculates NMs. These files are already available inside the [modes](https://github.com/antonielgomes/dpMD/tree/main/tutorial/modes) directory.
+The minimized structure are available in crd and pdb files, filling the b-factor column with NM fluctuations in angstrom (`minimized-angstrom`), as a magnitude vector (`minimized-b-factor`) and as b-factor (`minimized-vector-magnitude`). The `modes.mod` contains all calculated NMs.
 
-[modes](https://github.com/antonielgomes/dpMD/tree/main/tutorial/modes)
-
-inputs  mdenm  modes  readme.txt  scripts  toppar  toppar.str  vmod
-### Normal 
-
-
-calculate normal modes
+This protocol provides [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) for performing NM calculations.
+The first 194 low-frequeny NMs can be by running the following command:
+```
 charmm -i scripts/normal-modes.inp
-
-generate crd and dcd of modes:
+```
+Following, NMs can be written as coordinates vectors or trajectories. Here, only the first 14 low-frequency NMs will be generated:
+```
 charmm -i scripts/normal-modes-dcd-crd.inp nmodes=14
-
-combine normal modes:
-charmm -i scripts/normal-mode-combination.inp ncomb=6 nmodes=14 inputfile=./inputs/input-modes.txt
-
-
-
-calculate `normal modes`
 ```
-charmm -i scripts/normal-modes.inp
+### Normal mode combinations
+To obtain uniformly combined set of NM vectors, the input files `input-modes.txt` - containing the uniformly distributed set of vectors obtained from [PDIM](https://github.com/antonielgomes/dpMD/tree/main/PDIM) - and `list-modes.txt` - containing the NM numbers will be provided. Both are available into the [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) directory.
+In this tutorial, six combinations (`ncomb`, number of vectors) will be generated, while it will be read only the first 14 low-frequency NMs (`nmodes`).
+```
+charmm -i scripts/normal-mode-combination.inp ncomb=6 nmodes=14 inputfile=./inputs/input-modes.txt listmodes=./inputs/list-modes.txt 
 ```
 
-**PDIM** is also available in a compiled version for [Linux](https://github.com/soedinglab/MMseqs2/archive/71dd32ec43e3ac4dabf111bbc4b124f1c66a85f1.zip) and Windows.
-
-
-generate crd and dcd of modes:
+### Generating structures along combined normal modes with VMOD
+In this step, the vacuum minimized structure will be displaced along all uniformly combined NM vectors using the `vmod.inp` script, located into the [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) directory. This step can be done automatically by running `vmod.sh` script in bash:
 ```
-charmm -i scripts/normal-modes-dcd-crd.inp nmodes=20
-```
-
-generating normal mode combination
-```
-bash scripts/mdenm-modes-combination.sh
-```
-
-combine normal modes
-```
-charmm -i scripts/normal-mode-combination.inp ncomb=6
-```
-
-**VMOD**
-```
-scripts/runvmod-comb.sh = run vmod to obtain displaced conformations
+bash scripts/vmod.sh
 ```
 
 **dpMD**
