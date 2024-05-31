@@ -1,0 +1,358 @@
+* MOLECULAR DYNAMICS WITH EXCITED NORMAL MODES
+* USING UNIFORMLY COMBINED NORMAL MODES
+* Antoniel A. S. Gomes & D. Perahia (2024)
+*
+
+! The MDeNM (molecular dynamics with excited normal modes) method consists of multiple-replica 
+! short MD simulations in which motions described by a given subset of low-frequency NMs are
+! kinetically excited. This is achieved by adding additional atomic velocities along several
+! randomly determined linear combinations of NM vectors, thus allowing an efficient coupling
+! between slow and fast motions. The relatively high-energy conformations generated with MDeNM
+! are further relaxed with standard MD simulations, enabling free energy landscapes to be determined.
+! MDeNM provides a larger extent of sampling in a few nanoseconds, outperforminglong standard MD
+! simulations. A high degree of correlation with motions inferred from experimental sources
+! (X-ray, EPR, and NMR) and with free energy estimations obtained by metadynamics was observed.
+! Finally, the large sets of conformations obtained with MDeNM can be used to better characterize
+! relevant dynamical populations, allowing for a better interpretation of experimental data such
+! as SAXS curves and NMR spectra.
+!
+! Reference:
+! Costa MGS, Batista PR, Bisch PM, Perahia D. Exploring Free Energy Landscapes of Large Conformational Changes:
+! Molecular Dynamics with Excited Normal Modes. J Chem Theory Comput. 2015 May 5;11(6):2755-2767.
+! DOI: http://dx.doi.org/10.1021/acs.jctc.5b00003
+!
+
+! input file defined in the external command line
+! ex: charmm -i ./mdenm/mdenm-rmsfilter.inp inputfile=./mdenm/input-modes.txt rep=<num>  -o ./mdenm/excitations/@rep/mdenm-rmsfilter.out &
+
+DIMENS CHSIZE 3000000 MAXRES 3000000
+
+bomlev -5
+wrnlev 5  
+
+! open the additional inputfile that includes the excitation parameters
+open read card unit 13 name @inputfile
+
+! get the excitation input temperature 
+get tempuser unit 13
+
+! get number of excitations
+get nexc unit 13
+
+! get output name
+get output  unit 13
+
+! Read topology and parameter files
+stream toppar.str
+
+! Read PSF
+open read unit 10 card name ./inputs/step3.psf
+read psf  unit 10 card xplor
+
+! Read Coordinate
+!open read unit 10 card name ./crd/step6.crd
+!read coor unit 10 card
+read namd file "./inputs/step6.coor"
+
+!
+! Setup PBC (Periodic Boundary Condition)
+!
+
+stream ./inputs/step3.str
+
+!
+! Image Setup
+!
+
+open read unit 10 card name ./inputs/crystal_image.str
+CRYSTAL DEFINE @XTLtype @A @B @C @alpha @beta @gamma
+CRYSTAL READ UNIT 10 CARD
+
+!Image centering by residue
+IMAGE BYRESID XCEN @xcen YCEN @ycen ZCEN @zcen sele resname TIP3 end
+IMAGE BYRESID XCEN @xcen YCEN @ycen ZCEN @zcen sele ( segid @posid .or. segid @negid ) end
+
+!
+! Nonbonded Options
+!
+
+nbonds atom vatom vfswitch bycb -
+       ctonnb 10.0 ctofnb 12.0 cutnb 16.0 cutim 16.0 -
+       inbfrq -1 imgfrq -1 wmin 1.0 cdie eps 1.0 -
+       ewald pmew fftx @fftx ffty @ffty fftz @fftz  kappa .34 spline order 6
+energy
+
+!
+! Restraint to place center of mass of the molecules near the origin
+!
+
+MMFP
+GEO rcm sphere -
+    Xref @xcen Yref @ycen Zref @zcen XDIR 1.0 YDIR 1.0 ZDIR 1.0 -
+    harmonic FORCE 1.0 select @PROT end
+END
+
+! units to store information are zeroed
+scalar zero stor 1
+scalar zero stor 2
+scalar zero stor 3
+scalar zero stor 4
+scalar zero stor 5
+
+! defining excited atoms and system atoms
+define PROT sele ( @PROT ) end
+
+set numatom ?nsel
+set allatom ?natom
+
+!open the structure list file for RMS Filtering
+open read card unit 61 name ./mdenm/excitations/struct-list/struct-list.txt
+
+!
+!!!!!!!!!!!!=================== BEGIN OF NORMAL MODES COMBINATION BLOCK ==================!!!!!!!!!!!!
+!
+! This part is for create a Q vector representing the combination of modes listed at the
+! input-modes.txt file. The NMs are randomized and accumulated at the Q vector, that is
+! finally normalized.
+!
+!!!!!!!!!!!!======================== IMPORTANT UPDATE ========================!!!!!!!!!!!!
+!
+! In the new version, normal mode vectors are combined and normalized with vibran
+! Thus, this step is no more needed
+! Antoniel A. S. Gomes & D. Perahia (2024)
+!
+
+! Read combined mode as comp
+open read card unit 17 name ./modes/combined-modes/crd/mode-@rep.crd
+read coor card comp unit 17
+
+! mass-unweighting
+scalar sca4 = MASS
+scalar sca4 sqrt
+scalar xcomp prod sca4
+scalar ycomp prod sca4
+scalar zcomp prod sca4
+
+! Putting to zero the atoms not considered in normal modes calculation
+scalar xcomp set 0 sele .NOT. PROT end
+scalar ycomp set 0 sele .NOT. PROT end
+scalar zcomp set 0 sele .NOT. PROT end
+
+!
+!!!!!!!!!!!!==================== END OF NORMAL MODES COMBINATION BLOCK ===================!!!!!!!!!!!!
+!
+!
+!
+!!!!!!!!!!!!======================== BEGIN OF RMS FILTERING BLOCK ========================!!!!!!!!!!!!
+!
+! This part is for accepting or rejecting the Q vector. An rms treshold value is used. 
+! If a displaced structure along the Q vector to a given predetermined rms distance from origin 
+! has rms deviations with respect to the previous retained structures larger than the treshold
+! value this structure is retained and the Q vector accepted. The following steps are used:
+! A temporary normal mode file containing the Q vector is first created.
+! Thereafter the initial structure is displaced to a given rms along the Q vector.
+! The rms deviations with respect to preceding displaced structures are calculated
+! If the rms deviations with respect to a preceding structure is lower than the treshold value
+! the combination of modes (defining the Q vector) is rejected. A new combination is tested.
+! If no value lower than the treshold is found thus the coordinates of the displaced structure
+! is written into a file, the list of accepted structures is updated. The combination of modes
+! is accepted, and the calculations are pursued. 
+!
+!!!!!!!!!!!!======================== IMPORTANT UPDATE ========================!!!!!!!!!!!!
+!
+! The utilization of a uniform set of vectors overcomes the need of filtering and comparing combined vectors
+! However, we still maintain this code for further verification if everything works
+!
+
+! RMS value for filtering (Å)
+set rmstreshold 1.0
+! number of trials
+set numtrials 100000
+
+! check if is normalized
+! although the vector is normalized inside vibran, this step is maintained to double-check the vctor
+! comp is stored in sca1 to sca3
+
+scalar xcomp +sto 1
+scalar ycomp +sto 2
+scalar zcomp +sto 3
+
+scalar xcomp ipow 2
+scalar ycomp ipow 2
+scalar zcomp ipow 2
+
+!scalar zero stor 5
+scalar xcomp store 5
+scalar ycomp +sto 5
+scalar zcomp +sto 5
+scalar sca5 stat
+calc norm = SQRT( ?stot )
+
+if @norm .gt. 1.0 stop
+if @norm .lt. 0.999 stop
+
+scalar xcomp recall 1
+scalar ycomp recall 2
+scalar zcomp recall 3
+
+update inbf 0 imgfrq 0
+
+vibran nmod 1
+edit incl comp
+! This RMS value is a correction term based on the SELECTION/SYSTEM atom ratio
+! to achieve the desired filtering threshold
+! rms = 1 * sqrt(Nsele/Nsyst)
+
+! In this step, we don't use the treshold, is just generating the structure starting from initial one. It shold be 1.
+! The threshold is applyed only between the replicas
+calc rmscorrection = 1*sqrt(@numatom/@allatom)
+
+fill diff mode 1 rms @rmscorrection
+end
+
+coor orie rms comp sele PROT end
+
+system "wc -l ./mdenm/excitations/struct-list/struct-list.txt | cut -d" " -f1 > ./mdenm/excitations/"@rep"/lines_all.txt"
+open read card unit 81 name ./mdenm/excitations/@rep/lines_all.txt
+get nlines unit 81
+system "rm ./mdenm/excitations/"@rep"/lines_all.txt"
+
+if @nlines .eq. 0 goto exfilter
+
+set ifilter 0
+label filter
+incr ifilter by 1
+
+get structpath unit 61
+
+open read card unit 63 name @structpath
+read coor card unit 63 sele @PROT end
+
+coor orie rms comp sele @PROT end
+
+if @ifilter .eq. @nlines goto exfilter
+
+goto filter
+label exfilter
+
+system "echo ./mdenm/excitations/struct-list/struct-rep"@rep".crd | tr '[A-Z]' '[a-z]' >> ./mdenm/excitations/struct-list/struct-list.txt"
+
+open write card unit 62 name ./mdenm/excitations/struct-list/struct-rep@rep.crd
+write coor comp card unit 62
+open write card unit 62 name ./mdenm/excitations/struct-list/struct-rep@rep.pdb
+write coor comp pdb unit 62
+
+!
+!!!!!!!!!!!!========================= END OF RMS FILTERING BLOCK =========================!!!!!!!!!!!!
+!
+!
+!
+!!!!!!!!!!!!==================== BEGIN OF NORMAL MODES EXCITATION BLOCK ==================!!!!!!!!!!!!
+!
+! This part is for create the additional velocities obtained by displacement along the Q vector 
+!
+
+! Setting Q vector as velocities
+scalar xcomp recall 1
+scalar ycomp recall 2
+scalar zcomp recall 3
+
+! write the Q vector
+!open write card unit 97 name ./mdenm/excitations/@rep/vectormodes-nofscale.crd
+!write coor comp card unit 97 
+!* Q vector
+!* Combined Normal Mode replica @rep
+!* No fscale
+!*
+
+!
+! NPT dynamics
+! Obtaining energy generated by Q vector
+! Timestep small enough (10E-07) to get the temperature at time 0
+! iasvel : assignment of velocities (0 reads velocities from comp)
+!
+!
+
+!
+! Previous box information from namd
+!
+
+!     TANPI16=PI/16.0
+!     TANPI16=TAN(TANPI16)
+!     TANP2=TANPI16**2
+!     V1=VARB(1)/(ONE+TANP2)
+!     XTLABC(1)=V1
+
+system "tail -1 inputs/step6.xsc | awk '{print $2}' > cr.txt"
+open unit 2 read card name ./cr.txt
+get v1 unit 2
+close unit 2
+system "rm cr.txt"
+!set v1 = 80.316355432
+calc TANPI16 = ?PI / 16.0
+calc TANPI16 = TAN( @TANPI16 )
+calc TANP2 = @TANPI16 ** 2
+calc A = ( 1.0 + @TANP2 ) * @V1
+calc B = @A
+calc C = @A
+
+!
+! Previous box information from charmm
+!
+
+!bomlev -5
+!open read unit 11 card name ./rst/step6.rst
+!read coor dynr curr unit 11
+!bomlev 0
+!calc A = ?XTLA
+!calc B = ?XTLB
+!calc C = ?XTLC
+
+! Reading parameters of crystal and current coordinates
+!open read card unit 12 name ./rst/step6.rst
+!read coor dynr curr unit 12
+read namd file "./inputs/step6.coor"
+
+! Setting Q vector as velocities
+scalar xcomp recall 1
+scalar ycomp recall 2
+scalar zcomp recall 3
+
+! estimate Pmass from SYSmass (total system mass)
+! [there could be problems with exreme values, such as  Pmass << SYSmass or Pmass >> SYSmass
+scalar mass stat
+calc Pmass = int ( ?stot  /  50.0 )
+
+set temp = @temp
+
+shake bonh param fast
+
+DYNA CPT leap start nstep 1 timestep 10E-07 -
+     ntrfrq 1000 iasvel 0 -
+     PCONSTANT pref   1.0  pmass @Pmass  pgamma   20.0 -
+     HOOVER    reft @temp  tmass 2000.0  tbath   @temp  firstt @temp
+
+! Distributing Q vector energy equally to excited atoms
+! scaled by input temperature
+
+calc fscale = sqrt(@tempuser/ ?temp )
+
+scalar xcomp recall 1
+scalar ycomp recall 2
+scalar zcomp recall 3
+
+scalar xcomp mult @fscale
+scalar ycomp mult @fscale
+scalar zcomp mult @fscale
+
+! write the Q vector
+open write card unit 97 name ./mdenm/excitations/@rep/vectormodes.crd
+write coor comp card unit 97
+* Q vector
+* Combined Normal Mode replica @rep
+* Input Temperature = @tempuser
+* Q vector temperature = ?TEMP
+* fscale = @fscale
+*
+
+stop
