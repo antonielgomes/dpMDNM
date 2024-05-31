@@ -79,10 +79,24 @@ bash scripts/dpmd-free-md.sh
 ```
 For each combined vector directory inside the `dpMD directory`, a `free-md directory` will contain trajectories of all conformations after standard MD. These data can be further analyzed to extract valuable structural, dynamicas and functional aspects of a given protein.
 
-### Bonus: **Molecular Dynamicas with excited Nornal Modes (MDeNM) with NAMD**
+### Bonus: Running Molecular Dynamicas with excited Nornal Modes with NAMD
+
+MDeNM was initially devised to run in CHARMM. Recently, our team implemented MDeNM to work with elastic NMs or Principal Components within the R program, termed [MDexciteR](https://doi.org/10.1021/acs.jctc.2c00599), enabling MDeNM to run with several MD engines, such as [GROMACS](https://www.gromacs.org/), [AMBER](https://ambermd.org/), or [NAMD](http://www.ks.uiuc.edu/Research/namd/). Our effort is to spread MDeNM and facilitate its usage among researchers who are interested in performing efficient protein conformational explorations.
+In a further step, we improved MDeNM efficaty by using uniformly combined NMs, implementing the same methodological procedure for running with [NAMD](http://www.ks.uiuc.edu/Research/namd/) through Python programming. All input files are located into the [MDeNM](https://github.com/antonielgomes/dpMD/tree/main/tutorial/mdenm) directory, which contains:
+- MDeNM input parameters: excitation temperature, number of replicas, and output names are inside the `input-mdenm.txt` file.
+- MDeNM preparation: `mdenm-combined-modes.inp` generates the excitation vector for every combined NM mode.
+- NAMD directory:
+  - FILES
+
+`charmm_vector_namd.py`
+`namd_vectors_sum.py`
+NAMD
+charmm_vector_namd.py  namd-exc.inp  namd-md.inp  namd_vectors_sum.py
+
+running the `dpmd-free-md.inp` script. This step can be done automatically by running `mdenm-namd-exc.sh` script in bash:
 
 ```
-scripts/mdenm-namd-exc.sh
+bash scripts/mdenm-namd-exc.sh
 ```
 
 ```
