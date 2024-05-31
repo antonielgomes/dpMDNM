@@ -29,5 +29,8 @@ In addition, dpMD can be adapted to `any NM vectors` obtained from other techniq
 ### Tutorial: hen egg-white Lysozyme
 A step-by-step tutorial is available for those who want to perform dpMD. Please access the [tutorial](https://github.com/antonielgomes/dpMD/tree/main/tutorial) directory for further information.
 
+### Contact
+Questions or suggestions should be addressed to antonielaugusto@gmail.com
+
 <!-- ### Reference
 If you use PDIM or dpMD, please refer to the following publication: -->
