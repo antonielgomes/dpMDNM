@@ -19,7 +19,7 @@ PDIM is written in `Python` and uses `numpy` and `scipy` libraries for calculati
 ### Usage
 PDIM reads input variables directly from the command line:
 ```
-python3.8 PDIM.py -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
+python3 PDIM.py -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
 ```
 or using the standalone script:
 ```
