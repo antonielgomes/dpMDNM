@@ -23,7 +23,7 @@ Before performing dpMD, the following input files for CHARMM and NAMD are requir
 
 ### Normal mode calculations
 As dpMD uses normal modes (NMs) to obtain large conformational exploration, they must be calculated and provided as `mass-weighted` coordinate files. Although NMs can be calculated by several tools, this tutorial uses [CHARMM](https://www.charmm.org/), which minimizes the equilibrated protein in vacuum and then calculates NMs. These files are already available inside the [modes](https://github.com/antonielgomes/dpMD/tree/main/tutorial/modes) directory.
-The minimized structure are available in crd and pdb files, filling the b-factor column with NM fluctuations in angstrom (`minimized-angstrom`), as a magnitude vector (`minimized-b-factor`) and as b-factor (`minimized-vector-magnitude`). The `modes.mod` contains all calculated NMs.
+The minimized structure is available in crd and pdb files, filling the b-factor column with NM fluctuations in angstrom (`minimized-angstrom`), as a magnitude vector (`minimized-b-factor`) and as b-factor (`minimized-vector-magnitude`). The `modes.mod` contains all calculated NMs. They have the same XYZ coordinates.
 
 This protocol provides [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) for performing NM calculations.
 100 low-frequeny NMs can be calculated running the following command:
