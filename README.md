@@ -13,7 +13,7 @@ Once all these information are ready, dpMD is be performed in three stages:
 - Second stage: [Targeted Molecular Dynamics (TMD)](https://doi.org/10.1080/08927029308022170) simulations are conducted for the solvated system, driving the protein towards those structures obtained in the first stage.
 - Third stage: all solvated conformations obtained in the preciding stage are further equilibrated and submitted to standard MD simulations to obtain an equilibrated unbiased conformational ensemble.
 
-The conformational ensemble obtained in the third stage corresponds to the conformational exploration performed by dpMD, in which can provide structural, dynamicas and functional aspects of the studied protein.
+The ensemble of structures obtained in the third stage corresponds to the conformational exploration performed by dpMD, in which can provide structural, dynamicas and functional aspects of the studied protein.
 
 ### Why using dpMD?
 
