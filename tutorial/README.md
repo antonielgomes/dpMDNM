@@ -61,25 +61,27 @@ A `dpMD directory` will be created, containing corresponding directory for each 
 ```
 bash scripts/dpmd-tmd.sh
 ```
-For each combined vector directory inside the `dpMD directory`, a `tmd directory` will contain all solvated structures along the combined vector.
-Now, each conformation will be equilibrated under position restraints to accommodate the solvent:
+For each combined vector directory inside the `dpMD directory`, a `tmd directory` will contain all solvated structures.
+Now, each conformation will be equilibrated under position restraints for solvent accommodation. Firstly, generate all conformations in the PDB format for positional restraints:
 ```
 charmm -i scripts/dpmd-restraints.inp ncomb=6
 ```
-
-This step can be done automatically by running `dpmd-equil.sh` script in bash:
+Then, equilibrate every solvated conformation running the `dpmd-equi.inp` script. This step can be done automatically by running `dpmd-equil.sh` script in bash:
 ```
 bash scripts/dpmd-equil.sh
 ```
+For each combined vector directory inside the `dpMD directory`, a `equil directory` will contain all equilibrated systems.
 
 ### dpMD: third stage
 ##### Exploring the conformational space with unrestrained MD simulations
-As a final step, all generated conformations will be subsequently submitted to standard MD for efficient protein conformational sampling.
+As a final step, all generated conformations will be subsequently submitted to standard MD for efficient protein conformational sampling, running the `dpmd-free-md.inp` script. This step can be done automatically by running `dpmd-free-md.sh` script in bash:
 ```
 bash scripts/dpmd-free-md.sh
 ```
+For each combined vector directory inside the `dpMD directory`, a `free-md directory` will contain trajectories of all conformations after standard MD. These data can be further analyzed to extract valuable structural, dynamicas and functional aspects of a given protein.
 
-### Bonus: **MDeNM**
+### Bonus: **Molecular Dynamicas with excited Nornal Modes (MDeNM) with NAMD**
+
 ```
 scripts/mdenm-namd-exc.sh
 ```
