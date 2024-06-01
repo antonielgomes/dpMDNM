@@ -107,7 +107,7 @@ Following, run the standard free-md step:
 ```
 bash mdenm/mdenm-namd-free-md.sh
 ```
-A `free-md` directory will be created for each combined NM, trajectories of all excitations after standard MD. These data can be further analyzed to extract valuable structural, dynamic, and functional aspects of a given protein.
+A `free-md` directory will be created for each combined NM, containing trajectories of all excitations after standard MD. These data can be further analyzed to extract valuable structural, dynamic, and functional aspects of a given protein.
 
 ### Contact
 Questions or suggestions should be addressed to antonielaugusto@gmail.com
