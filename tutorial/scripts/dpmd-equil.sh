@@ -16,5 +16,5 @@ for rep in $(seq 1 $nreps); do
 		/usr/local/namd2/namd2 +p 2 dpmd-equil.inp > equil_${rep}_${dstep}.out
 		sleep 3
 	done
-	cd ../../
+	cd ../../../
 done
