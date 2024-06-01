@@ -91,6 +91,8 @@ Further, the efficacy of MDeNM was improved by using uniformly combined NMs, imp
   - Python scripts `charmm_vector_namd.py` - for converting charmm coordinates to the namd format - and `namd_vectors_sum.py` - for generating the excited system inputs.
   - NAMD input scripts `namd-exc.inp` - for performing excitation steps - and `namd-free-md.inp` - for performing standard free-md of each excitation.
 
+**NOTE:** please run NM combination as explained in [normal-mode-combinations](https://github.com/antonielgomes/dpMD/tree/main/tutorial#normal-mode-combinations).
+
 In the first step, process files, and directories will be generated, including excitation vectors (`vectormodes.crd` files) for each combined NM automatically by running the `mdenm-combined-modes.sh` script in bash:
 ```
 bash mdenm/mdenm-combined-modes.sh
