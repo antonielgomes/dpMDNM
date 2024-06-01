@@ -5,7 +5,7 @@ nreps=$(wc -l ./inputs/list-modes.txt | awk '{print $1}')
 
 #generating namd topologies
 mkdir ./mdenm/namd/toppar/
-python ./scripts/convert_par2namd.py ./toppar.str ./toppar/ ./mdenm/namd/
+python ./mdenm/namd/convert_par2namd.py ./toppar.str ./toppar/ ./mdenm/namd/
 
 #generating namd input files
 tr '[:upper:]' '[:lower:]' < inputs/step3.str | sed -e "s/ =//g" | grep -v "set prot" > ./mdenm/namd/step3.str
