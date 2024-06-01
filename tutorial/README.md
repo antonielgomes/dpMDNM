@@ -79,7 +79,7 @@ bash scripts/dpmd-free-md.sh
 ```
 For each combined vector directory inside the `dpMD directory`, a `free-md directory` will contain trajectories of all conformations after standard MD. These data can be further analyzed to extract valuable structural, dynamic, and functional aspects of a given protein.
 
-### Bonus: Running Molecular Dynamics with excited Normal Modes with uniformly combined normal modes
+### Bonus: Using uniformly combined vectors with Molecular Dynamics with excited Normal Modes
 
 [MDeNM](https://doi.org/10.1021/acs.jctc.5b00003) is a `multi-replica` method to explore protein conformational changes through successive kinetic excitations along a diverse set of combined NM vectors using short standard MD simulations. Initially, MDeNM devised to run in CHARMM. Recently our team implemented this technique to work with elastic NMs or Principal Components within the R program, termed [MDexciteR](https://doi.org/10.1021/acs.jctc.2c00599), enabling MDeNM to run with several MD engines, such as [GROMACS](https://www.gromacs.org/), [AMBER](https://ambermd.org/), or [NAMD](http://www.ks.uiuc.edu/Research/namd/). We make efforts to spread MDeNM and facilitate its usage among researchers interested in performing efficient protein conformational explorations.
 Further, the efficacy of MDeNM was improved by using uniformly combined NMs, implementing the same methodological procedure for running with [NAMD](http://www.ks.uiuc.edu/Research/namd/) through Python programming. All input files are located in the [MDeNM](https://github.com/antonielgomes/dpMD/tree/main/tutorial/mdenm) directory, which contains the following:
