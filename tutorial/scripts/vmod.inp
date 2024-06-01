@@ -1,0 +1,157 @@
+* GENERATING MINIMIZED STRUCTURES ALONG NORMAL MODES
+* D. Perahia 24 aout 2009
+* Update (Antoniel AS Gomes 2024) reads the previous minimized conformation
+*
+
+DIMENS CHSIZE 3000000 MAXRES 3000000
+
+! Read topology and parameter files
+stream toppar.str
+
+! Read PSF
+open read unit 10 card name ./inputs/step1.psf
+read psf  unit 10 card xplor
+
+! Read Coordinate
+!open read unit 10 card name ./crd/step6-vmod.crd
+open read unit 10 card name ./modes/minimized-angstrom.crd
+read coor unit 10 card
+
+!
+! Setup PBC (Periodic Boundary Condition)
+!
+
+stream ./inputs/step3.str
+
+define PROT sele @PROT end
+
+!
+! Nonbonded Options
+!
+
+updat ihbfrq -1 inbfrq -1 switch rdie eps 2 vswitch ctonnb 3 ctofnb 6 cutnb 10 wrnmxd 1.0
+!nbonds atom vatom vfswitch bycb -
+!       ctonnb 10.0 ctofnb 12.0 cutnb 16.0 cutim 16.0 -
+!       inbfrq -1 imgfrq -1 wmin 1.0 cdie eps 2.0 !-
+skip CMAP
+energy
+
+!###################
+! set which mode number you consider
+!set modnu 1
+
+! stepping along the mode
+set dstep 0.1
+
+! rms from the initial structure (in Angstrom)
+set mrmsneg   0
+set mrmspos   +3
+
+!###################
+!directory name where the coordinates and trajectory will be written
+system "mkdir -p ./vmod/mode-"@modnu""
+set dirnam ./vmod/mode-@modnu
+
+!normal mode file name
+open read file unit 40 name ./modes/combined-modes.mod
+
+!minimized initial structure
+set minic ./modes/minimized-angstrom.crd
+
+coor copy comp
+
+open write card unit 17 name @dirnam/mmfp.out
+write title unit 17
+* OUTPUT VMOD MODE = @modnu
+*
+
+set mrms @mrmsneg
+
+!------------
+! Initiales values
+!------------
+open read card unit 12 name @minic
+read coor card unit 12
+close unit 12
+
+updat ihbfrq -1 inbfrq -1 wrnmxd 1.0
+
+SET LOOP 0
+
+label recommence
+!===============================================
+!== Starting Loop ==============================
+!===============================================
+
+!------------
+! Open the starting structure (minimized)
+!------------
+open read card unit 12 name @minic
+read coor card unit 12
+close unit 12
+
+! copy coordinates to reference
+!coor copy comp
+
+IF LOOP .EQ. 1 GOTO PASS
+
+mmfp
+ vmod init mxmd 1 krot 0.0001 kcgr 1000 umdn 40 uout 17 nsvq 100
+ vmod add qn @mrms imdn @modnu kmdn 1000
+end
+
+LABEL PASS
+
+set kmod 10E6
+
+mmfp
+vmod change nrestraint 1 qn @mrms kmdn @kmod
+end
+
+mmfp
+vmod print
+end
+
+mini SD nstep 10000 tolgrd 0.1 NPRINT 10
+mini ABNR nstep 20000 tolgrd 0.01 NPRINT 10
+
+! compute energy of the minimized structure
+ener
+! compute the rmsd from the initial structure
+coor rms
+
+! write the final minimized coordinates
+open write card unit 13 name @dirnam/conformation_@mrms.crd
+write coor card unit 13
+* minimized coordinates
+* NORMAL_MODES= @modnu
+* TARGET_NORMAL_COORDINATES= @mrms
+* BONDS= ?BOND ANGLes= ?ANGL UREY= ?UREY
+* DIHE= ?DIHE IMPR= ?IMPR
+* VDW= ?VDW ELEC= ?ELEC HBONDs= ?HBON ASP= ?ASP
+* TOTAL_E= ?ENER MMFP= ?VMOD RMSD= ?RMS
+*
+close unit 13
+
+set minic @dirnam/conformation_@mrms.crd
+
+SET LOOP 1
+
+!increment the rms values
+calc mrms = @mrms + @dstep
+
+if mrms .gt. @mrmspos goto fin
+
+goto recommence
+
+!===============================================
+!== Ending Loop ================================
+!===============================================
+
+label fin
+
+! close the normal mode file
+close unit 40
+close unit 17
+
+stop
