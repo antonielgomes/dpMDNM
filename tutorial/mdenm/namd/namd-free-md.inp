@@ -6,7 +6,7 @@ set exc             $::env(exc);
 set rep             $::env(rep);
 set inputname    rep-$rep-e$exc;       # taken from last CHarmm's simulations
 set pdbname               step6;       # taken from last CHarmm's simulations
-outputname  namd-rep-$rep-e$exc;       # NAMD writes .dcd files and the final .coor and .vel
+outputname    md-rep-$rep-e$exc;       # NAMD writes .dcd files and the final .coor and .vel
 set run                 1000000;       # 500000 steps = 1000 ps = 1 ns
 
 #structure   ../../../../param/step3.xplor.ext.psf
