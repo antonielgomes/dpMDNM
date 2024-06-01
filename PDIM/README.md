@@ -2,11 +2,11 @@
 
 **PDIM** (**P**oints in **DIM**ensions) is a minimization script that distributes N points on the surface of a D-dimensional unit-sphere according to an energetic potential of repulsion function E.
 
-In other words, normalized vectors are placed randomly in a unit-sphere, and then minimized to generate a uniform distribution.
+In other words, normalized vectors are randomly placed in a unit-sphere, and then minimized to generate a uniform distribution.
 
 <p align="center"><img src="https://github.com/antonielgomes/dpMD/blob/main/PDIM/PDIM.png" width="1000"/></p>
 
-Examples of minimization progress can be observed in [two](https://youtu.be/p4m_wOLcfo4) and [three](https://youtu.be/elFgtv4bCA0) dimensions.
+Examples of the minimization progress can be seen in [two](https://youtu.be/p4m_wOLcfo4) and [three](https://youtu.be/elFgtv4bCA0) dimensions.
 
 This script was devised to boost `protein conformational changes` using normal modes. We mapped the `normal mode space` into a `Euclidean space` for a **rational** normal mode combination and protein conformational exploration.
 
