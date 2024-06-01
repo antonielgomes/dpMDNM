@@ -127,7 +127,7 @@ label loop
 increment name by 1
 increment mode by 1
 open write file unit 10 name ./modes/combined-modes/dcd/mode-@name.dcd
-open write card unit 12 name ./modes/combined-modes/crd/combined-mode-@name.crd
+open write card unit 12 name ./modes/combined-modes/crd/mode-@name.crd
 write traj mode @mode mrms 2 phase 7.2 unit 10
 fill comp mode @mode fact 1.0
 coor write card comp unit 12
