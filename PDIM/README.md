@@ -25,7 +25,7 @@ or using the standalone script:
 ```
 ./PDIM -p 10 -d 3 -c 10 -t 0.001 -m classical -o n -s exp
 ```
-In this example, 10 points (-p, integer) are distributed in a sphere of 3 dimensions (-d, integer). 10 minimization cycles (-c, integer) are performed, with a tolerance energy (-t, float) of 0.001 per cycle. The classical minimization algorithm (-m, string) is used, without outputting every minimization step (-o, string). The exponent s is incremented (-s, string) by a power of 2 after every minimization cycle.
+In this example, 10 points (-p, integer) are distributed in a sphere of 3 dimensions (-d, integer). 10 minimization cycles (-c, integer) are performed, with a tolerance energy (-t, float) of 0.001 per cycle. The classical minimization algorithm (-m, string) is used without outputting every minimization step (-o, string). The exponent s is incremented (-s, string) by a power of 2 after each minimization cycle.
 
 PDIM generates `start.txt` and `points.txt` files, which correspond to the initial and final sets of points, respectively.
 
@@ -38,9 +38,9 @@ They are meaningful for monitoring the quality and `convergence` of data.
 
 ### Tips
 - Performance is highly affected as higher dimensions are considered. Consider using the `mirrored` algorithm. In this case, an `even number` of vectors is mandatory.
-- Sometimes convergence is achieved with a smooth minimization progress. In such cases, consider using the `-s sum` flag with a higher number of cycles (-c).
-- Although a rigorous convergence tolerance (-t) slows down the minimization progress, it is likely to obtain a better final set of points. Consider using `lower values`, such as 0.00001. 
-- The initial set of points is completely random, thus distinct final set of points is expected. It is reasonable to consider performing several runs and select the one with `higher` Mdist or Mangle.
+- Sometimes convergence is achieved with smooth minimization progress. In such cases, consider using the `-s sum` flag with a higher number of cycles (-c).
+- Although a rigorous convergence tolerance (-t) slows the minimization progress, it is likely to result in a better final set of points. Consider using `lower values`, such as 0.00001. 
+- The initial set of points is completely random, so a distinct final set of points is expected. It is reasonable to consider performing several runs and selecting the one with `higher` Mdist or Mangle.
 - Higher `s` means a higher energy. This explains why E is higher in a new cycle. Compare energy values only `within a cycle`.
 - If you want to obtain the set of points of every step, use `-o y`. It will generate files called step_**$(step number)**.txt.
 
