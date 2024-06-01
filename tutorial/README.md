@@ -36,7 +36,7 @@ charmm -i scripts/normal-modes-dcd-crd.inp nmodes=14
 ```
 ### Normal mode combinations
 To obtain a uniformly combined set of NM vectors, the input files `input-modes.txt` - containing the uniformly distributed set of vectors obtained from [PDIM](https://github.com/antonielgomes/dpMD/tree/main/PDIM) - and `list-modes.txt` - containing the NM numbers - should be provided. Both are available in the [scripts](https://github.com/antonielgomes/dpMD/tree/main/tutorial/scripts) directory.
-In this tutorial, six combinations (`ncomb`, number of vectors) of two NMs will be generated, while it will be read only the first 14 low-frequency NMs (`nmodes`).
+In this tutorial, six combinations (`ncomb`, number of vectors) of two NMs will be generated, while it will be read only the first 14 low-frequency NMs (`nmodes`):
 ```
 charmm -i scripts/normal-mode-combination.inp ncomb=6 nmodes=14 inputfile=./inputs/input-modes.txt listmodes=./inputs/list-modes.txt 
 ```
@@ -91,7 +91,7 @@ Further, the efficacy of MDeNM was improved by using uniformly combined NMs, imp
   - Python scripts `charmm_vector_namd.py` - for converting charmm coordinates to the namd format - and `namd_vectors_sum.py` - for generating the excited system inputs.
   - NAMD input scripts `namd-exc.inp` - for performing excitation steps - and `namd-free-md.inp` - for performing standard free-md of each excitation.
 
-**NOTE:** please run NM combination as explained in [normal-mode-combinations](https://github.com/antonielgomes/dpMD/tree/main/tutorial#normal-mode-combinations).
+**NOTE:** it is necessary generating combined NM vectors, as explained in [normal-mode-combinations](https://github.com/antonielgomes/dpMD/tree/main/tutorial#normal-mode-combinations).
 
 In the first step, process files, and directories will be generated, including excitation vectors (`vectormodes.crd` files) for each combined NM automatically by running the `mdenm-combined-modes.sh` script in bash:
 ```
