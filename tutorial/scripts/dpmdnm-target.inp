@@ -78,7 +78,7 @@ define BB   sele ( ( type C   .or. type O   .or. type N   .or. type CA  .or. -
 define SC   sele .not. BB .and. .not. hydrogen .and. ( PROT .or. CARB ) end
 
 set rep = 1
-system "mkdir dpmd"
+system "mkdir dpmdnm"
 label replica
 
  set dstep = 0
@@ -89,8 +89,8 @@ label replica
 
   scalar WCOMP set 1.0
 
-  system "mkdir dpmd/mode-@REP/"
-  open write card unit 10 name ./dpmd/mode-@REP/target_@DSTEP.pdb
+  system "mkdir dpmdnm/mode-@REP/"
+  open write card unit 10 name ./dpmdnm/mode-@REP/target_@DSTEP.pdb
   write coor pdb  unit 10 official comp sele PROT end
   * VMOD Target
   * Replica = @REP
