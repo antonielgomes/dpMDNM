@@ -1,6 +1,6 @@
 # Running distributed points Molecular Dynamics with Normal Modes
 
-This tutorial applies dpMD to [Lysozyme](https://www.rcsb.org/structure/3LZT), a classic example.
+This tutorial applies dpMDNM to [Lysozyme](https://www.rcsb.org/structure/3LZT), a classic example.
 dpMDNM was implemented to extract the best of two worlds: [CHARMM](https://www.charmm.org/) is used for normal mode calculations and file processing, while [NAMD](http://www.ks.uiuc.edu/Research/namd/) is used as MD engine. **Both programs must be installed, and paths must be updated in all bash scripts used in this tutorial**. Additional program flags (number of processes, GPU usage, etc.) should also be specified.
 
 All necessary [inputs](https://github.com/antonielgomes/dpMDNM/tree/main/tutorial/inputs) and [scripts](https://github.com/antonielgomes/dpMDNM/tree/main/tutorial/scripts) files can be downloaded for performing dpMDNM locally.
