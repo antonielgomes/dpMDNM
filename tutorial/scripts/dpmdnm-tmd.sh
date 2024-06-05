@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #generating namd topologies
-mkdir ./dpmd/
-mkdir ./dpmd/toppar/
-python ./scripts/convert_par2namd.py ./toppar.str ./toppar/ ./dpmd/
+mkdir ./dpmdnm/
+mkdir ./dpmdnm/toppar/
+python ./scripts/convert_par2namd.py ./toppar.str ./toppar/ ./dpmdnm/
 
 #generating namd input files
-tr '[:upper:]' '[:lower:]' < inputs/step3.str | sed -e "s/ =//g" | grep -v "set prot" > ./dpmd/step3.str
+tr '[:upper:]' '[:lower:]' < inputs/step3.str | sed -e "s/ =//g" | grep -v "set prot" > ./dpmdnm/step3.str
 
-cd ./dpmd/
+cd ./dpmdnm/
 colname=col.col
 echo -e "#\n# protein center of mass restraint\n#\n\ncolvar {name COM\ndistance {group1 {" > $colname
 echo psfSegID $(grep chain step3.str | awk '{for(i=4;i<NF;++i)print $i}') >> $colname
@@ -30,12 +30,12 @@ for rep in $(seq 1 $nreps); do
 	echo "mode-${rep}..."
 	mkdir ./mode-${rep}/tmd/
 	cd    ./mode-${rep}/tmd/
-	scp ../../../scripts/dpmd-tmd.inp ./dpmd-tmd.inp
+	scp ../../../scripts/dpmdnm-tmd.inp ./dpmdnm-tmd.inp
 
 	for dstep in 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3; do
 		export dstep=$dstep
 		echo "step ${dstep} submitted"
-		/usr/local/namd2/namd2 +p 2 dpmd-tmd.inp > tmd_${rep}_${dstep}.out
+		/usr/local/namd2/namd2 +p 2 dpmdnm-tmd.inp > tmd_${rep}_${dstep}.out
 		sleep 3
 	done
 	cd ../../
