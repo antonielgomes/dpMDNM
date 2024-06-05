@@ -9,9 +9,9 @@ Before performing conformational sampling with dpMDNM, a `preparation` step is n
 Once all this information is ready, dpMDNM will be performed in three stages:
 <p align="center"><img src="https://github.com/antonielgomes/dpMDNM/blob/main/dpMDNM.png" width="1000"/></p>
 
-- First stage: the same (vacuum minimized) structure used in NM calculations is subjected to a series of positional restraints potentials to generate structures properly distributed along NM vectors using [VMOD](https://doi.org/10.1016/0010-4655(95)00052-H).
-- Second stage: [Targeted Molecular Dynamics (TMD)](https://doi.org/10.1080/08927029308022170) simulations are conducted for the solvated system, driving the protein towards those structures obtained in the first stage.
-- Third stage: all solvated conformations obtained in the preceding stage are further equilibrated and subjected to standard MD simulations to obtain an equilibrated unbiased conformational ensemble.
+- dpVAC: the same (vacuum minimized) structure used in NM calculations is subjected to a series of positional restraints potentials to generate structures properly distributed along NM vectors using [VMOD](https://doi.org/10.1016/0010-4655(95)00052-H).
+- dpSOL: [Targeted Molecular Dynamics (TMD)](https://doi.org/10.1080/08927029308022170) simulations are conducted for the solvated system, driving the protein towards those structures obtained in the first stage.
+- dpMDNM: all solvated conformations obtained in the preceding stage are further equilibrated and subjected to standard MD simulations to obtain an equilibrated unbiased conformational ensemble.
 
 The ensemble of structures obtained in the third stage corresponds to the conformational exploration performed by dpMDNM, which can provide insights into protein structure, dynamics, and function.
 
