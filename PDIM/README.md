@@ -39,7 +39,7 @@ They are meaningful for monitoring the quality and `convergence` of data.
 ### Tips
 - Performance is highly affected as higher dimensions are considered. Consider using the `mirrored` algorithm. In this case, an `even number` of vectors is mandatory.
 - Sometimes convergence is achieved with smooth minimization progress. In such cases, consider using the `-s sum` flag with a higher number of cycles (-c).
-- Although a rigorous convergence tolerance (-t) slows the minimization progress, it is likely to result in a better final set of points. Consider using `lower values`, such as 0.00001. 
+- Although a rigorous convergence tolerance (-t) slows the minimization progress, it is likely to result in a better final set of points. Consider using `lower values`, such as 0.001. 
 - The initial set of points is completely random, so a distinct final set of points is expected. It is reasonable to consider performing several runs and selecting the one with `higher` Mdist or Mangle.
 - Higher `s` means a higher energy. This explains why E is higher in a new cycle. Compare energy values only `within a cycle`.
 - If you want to obtain the set of points of every step, use `-o y`. It will generate files called step_**$(step number)**.txt.
