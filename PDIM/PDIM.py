@@ -361,9 +361,6 @@ with open('start.txt', 'w') as f:
 #Initial input variables
 Ef = ener(codes) #Energy of the initial codes
 
-#Exponent of the minimization function
-#Different values allow good results in different conditions as the number of points and/or dimensions
-#s=ndim*3
 step = 0 #Step number
 
 #Minimization cycle
