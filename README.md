@@ -7,7 +7,7 @@ NM-driven enhanced-sampling methods highly depend on the set of NM vectors. To g
 ### How does dpMDNM work?
 Before performing conformational sampling with dpMDNM, a `preparation` step is necessary. Firstly, the protein of interest must be subjected to an `equilibration` step. Following, the protein is (in this case) minimized before `NM calculations`. Then, uniformly oriented vectors obtained from [PDIM](https://github.com/antonielgomes/dpMDNM/tree/main/PDIM) are used as weights for a `uniform NM combination` of the most relevant (usually low-frequency) modes.
 Once all this information is ready, dpMDNM will be performed in three stages:
-<p align="center"><img src="https://github.com/antonielgomes/dpMDNM/blob/main/dpMDNM.png" width="1000"/></p>
+<p align="center"><img src="https://github.com/antonielgomes/dpMDNM/blob/main/dpMDNM.jpeg" width="1000"/></p>
 
 - dpVAC: the same (vacuum minimized) structure used in NM calculations is subjected to a series of positional restraints potentials to generate structures properly distributed along NM vectors using [VMOD](https://doi.org/10.1016/0010-4655(95)00052-H).
 - dpSOL: [Targeted Molecular Dynamics (TMD)](https://doi.org/10.1080/08927029308022170) simulations are conducted for the solvated system, driving the protein towards those structures obtained in the first stage.
