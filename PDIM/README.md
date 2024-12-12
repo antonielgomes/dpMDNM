@@ -44,11 +44,10 @@ They are meaningful for monitoring the quality and `convergence` of data.
 - Higher `s` means a higher energy. This explains why E is higher in a new cycle. Compare energy values only `within a cycle`.
 - If you want to obtain the set of points of every step, use `-o y`. It will generate files called step_**$(step number)**.txt.
 
+### Reference
+If you use dpMDNM or PDIM, please refer to the following publication:
+
+Gomes, A. A. S.; Costa, M. G. S.; Louet, M.; Floquet, N.; Bisch, P. M.; Perahia, D. Extended Sampling of Macromolecular Conformations from Uniformly Distributed Points on Multidimensional Normal Mode Hyperspheres.  _J. Chem. Theory Comput._ **2024**, XX (X), XXX-XXX. DOI: [10.1021/acs.jctc.4c01054](https://doi.org/10.1021/acs.jctc.4c01054)
+
 ### Contact
 Questions or suggestions should be addressed to antonielaugusto@gmail.com
-
-
-<!-- ### Reference
-If you use PDIM or dpMD, please refer to the following publication:
-A [^1]
-[^1]: A -->
