@@ -109,5 +109,10 @@ bash mdenm/mdenm-namd-free-md.sh
 ```
 A `free-md` directory will be created for each combined NM, containing trajectories of all excitations after standard MD. These data can be further analyzed to extract valuable structural, dynamic, and functional aspects of a given protein.
 
+### Reference
+If you use dpMDNM or PDIM, please refer to the following publication:
+
+Gomes, A. A. S.; Costa, M. G. S.; Louet, M.; Floquet, N.; Bisch, P. M.; Perahia, D. Extended Sampling of Macromolecular Conformations from Uniformly Distributed Points on Multidimensional Normal Mode Hyperspheres.  _J. Chem. Theory Comput._ **2024**, XX (X), XXX-XXX. DOI: [10.1021/acs.jctc.4c01054](https://doi.org/10.1021/acs.jctc.4c01054)
+
 ### Contact
 Questions or suggestions should be addressed to antonielaugusto@gmail.com
