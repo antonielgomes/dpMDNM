@@ -29,8 +29,10 @@ In addition, dpMDNM can be adapted to `any NM vectors` obtained from other techn
 ### Tutorial: hen egg-white Lysozyme
 A step-by-step tutorial is available for those who want to perform dpMDNM. Please access the [tutorial](https://github.com/antonielgomes/dpMDNM/tree/main/tutorial) directory for further information.
 
+### Reference
+If you use dpMDNM or PDIM, please refer to the following publication:
+
+Gomes, A. A. S.; Costa, M. G. S.; Louet, M.; Floquet, N.; Bisch, P. M.; Perahia, D. Extended Sampling of Macromolecular Conformations from Uniformly Distributed Points on Multidimensional Normal Mode Hyperspheres.  _J. Chem. Theory Comput._ **2024**, XX (X), XXX-XXX. DOI: [10.1021/acs.jctc.4c01054](https://doi.org/10.1021/acs.jctc.4c01054)
+
 ### Contact
 Questions or suggestions should be addressed to antonielaugusto@gmail.com
-
-<!-- ### Reference
-If you use PDIM or dpMDNM, please refer to the following publication: -->
